@@ -57,7 +57,7 @@ class Spiceweasel::CookbookList
   #check the metadata for versions and gather deps
   def validateMetadata(cookbook,version)
     #check metadata.rb for requested version
-    metadata = File.open("cookbooks/#{cookbook}/metadata.rb").grep(/^version/)[0].split()[1].gsub(/"/,'').to_s
+    metadata = File.open("cookbooks/#{cookbook}/metadata.rb").grep(/^version/)[0].split()[1].gsub(/["']/,'').to_s
     STDOUT.puts "DEBUG: cookbook metadata version: #{metadata}" if Spiceweasel::DEBUG
     if version && metadata != version
       STDERR.puts "ERROR: Invalid version '#{version}' of '#{cookbook}' requested, '#{metadata}' is already in the cookbooks directory."
